@@ -223,3 +223,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# npm
+npm-debug.log*
+node_modules/
+.npm
+*.tsbuildinfo
+
