@@ -1,0 +1,38 @@
+{% load i18n static %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% translate "Menu" %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-brand" href="{% url 'home' %}">{% translate "Menu" %}</a>
+    <nav class="site-nav">
+      {% if user.is_authenticated %}
+        <span class="user-name">{{ user.username }}</span>
+        <form method="post" action="{% url 'accounts:logout' %}">
+          {% csrf_token %}
+          <button type="submit">{% translate "Log out" %}</button>
+        </form>
+      {% else %}
+        <a href="{% url 'accounts:login' %}">{% translate "Log in" %}</a>
+        <a href="{% url 'accounts:signup' %}">{% translate "Sign up" %}</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main class="site-main">
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

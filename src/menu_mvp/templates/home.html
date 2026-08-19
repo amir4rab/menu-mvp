@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Home" %}{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <h1>{% blocktranslate with username=user.username %}Welcome, {{ username }}!{% endblocktranslate %}</h1>
+    <p>{% translate "You are logged in." %}</p>
+  {% else %}
+    <h1>{% translate "Welcome" %}</h1>
+    <p>{% translate "You are not logged in." %}</p>
+  {% endif %}
+{% endblock %}
